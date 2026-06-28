@@ -2,7 +2,7 @@ package com.example.weatherapp.controller;
 
 import com.example.weatherapp.model.WeatherData;
 import com.example.weatherapp.service.WeatherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.weatherapp.service.CacheInspectionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,11 @@ import java.util.List;
 public class WeatherController {
 
     private final WeatherService weatherService;
+    private final CacheInspectionService cacheInspectionService;
 
-    @Autowired
-    public WeatherController(WeatherService weatherService) {
+    public WeatherController(WeatherService weatherService, CacheInspectionService cacheInspectionService) {
         this.weatherService = weatherService;
+        this.cacheInspectionService = cacheInspectionService;
     }
 
     // Input/Save weather data
@@ -62,5 +63,17 @@ public class WeatherController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/getCacheData")
+    public void getCacheData() {
+        cacheInspectionService.printCacheContents("weather");
+    }
+
+    @GetMapping("/clearCache")
+    public String clearCache() {
+        cacheInspectionService.clearCache("weather");
+        cacheInspectionService.clearCache("allWeather");
+        return "Cache cleared successfully!";
     }
 }

@@ -119,5 +119,3 @@ This service exists purely as a debugging/visibility tool — it doesn't replace
 | DELETE | `/api/weather/{city}` | Delete weather data |
 | GET | `/api/weather/getCacheData` | View cache data |
 | GET | `/api/weather/clearCache` | Clear cache |
-
-(Adjust paths above to match your actual controller mappings.)

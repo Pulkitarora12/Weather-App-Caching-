@@ -73,7 +73,6 @@ public class WeatherController {
     @GetMapping("/clearCache")
     public String clearCache() {
         cacheInspectionService.clearCache("weather");
-        cacheInspectionService.clearCache("allWeather");
         return "Cache cleared successfully!";
     }
 }

@@ -46,12 +46,12 @@ public class WeatherService {
         return weatherRepository.findByCityIgnoreCase(city);
     }
 
-    @Cacheable("allWeather")
+    @Cacheable(value = "weather", key = "'allWeather'")
     public List<WeatherData> getAllWeather() {
         logger.info("Database Call: findAll");
         return weatherRepository.findAll();
     }
-    
+
     @CachePut(value = "weather", key = "#city")
     public WeatherData updateWeather(String city, WeatherData data) {
         logger.info("Database Call: findByCityIgnoreCase for update of city: {}", city);
